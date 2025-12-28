@@ -1,5 +1,6 @@
-﻿// BallController.cs
+﻿// BallController.cs - YENİ INPUT SYSTEM İÇİN
 using UnityEngine;
+using UnityEngine.InputSystem; // YENİ SATIR
 
 public class BallController : MonoBehaviour
 {
@@ -25,10 +26,17 @@ public class BallController : MonoBehaviour
     // Her frame'de çalışır (saniyede onlarca kez)
     void Update()
     {
-        // Fare sol tıklaması VEYA mobilde ekrana dokunma kontrolü
-        if (Input.GetMouseButtonDown(0) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began))
+        // MOUSE veya TOUCH kontrolü - YENİ SİSTEM
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            // Rengi değiştir
+            // Fare ile tıklama
+            ChangeColor();
+        }
+
+        // Dokunmatik ekran kontrolü
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
+        {
+            // Mobil dokunuş
             ChangeColor();
         }
     }

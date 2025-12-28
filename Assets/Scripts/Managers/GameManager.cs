@@ -1,6 +1,6 @@
 ﻿// GameManager.cs
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro; // TextMeshPro için
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     // Skoru gösterecek UI Text bileşeni
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
 
     // Oyun bitince gösterilecek panel
     public GameObject gameOverPanel;
