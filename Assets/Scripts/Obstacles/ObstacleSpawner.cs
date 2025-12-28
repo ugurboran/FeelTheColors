@@ -63,7 +63,7 @@ public class ObstacleSpawner : MonoBehaviour
         Rigidbody2D rb = obstacle.GetComponent<Rigidbody2D>();
 
         // Engele SAĞDAN SOLA (Vector2.left) hareket hızı ver
-        rb.velocity = Vector2.left * obstacleSpeed;
+        rb.linearVelocity = Vector2.left * obstacleSpeed;
 
         // 10 saniye sonra bu engeli yok et (bellek tasarrufu)
         Destroy(obstacle, 10f);
