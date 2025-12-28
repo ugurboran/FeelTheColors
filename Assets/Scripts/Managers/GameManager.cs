@@ -53,4 +53,14 @@ public class GameManager : MonoBehaviour
         // Şu anki sahneyi yeniden yükle (oyunu baştan başlat)
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    // Ana menüye dön (Button tarafından çağrılır)
+    public void LoadMainMenu()
+    {
+        // Zamanı normale döndür
+        Time.timeScale = 1;
+
+        // Ana menü sahnesini yükle
+        SceneManager.LoadScene("MainScene");
+    }
 }
