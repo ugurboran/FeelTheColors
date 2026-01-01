@@ -1,5 +1,6 @@
-﻿// PauseManager.cs
+﻿// PauseManager.cs - YENİ INPUT SYSTEM İÇİN
 using UnityEngine;
+using UnityEngine.InputSystem; // YENİ SATIR
 
 public class PauseManager : MonoBehaviour
 {
@@ -15,8 +16,8 @@ public class PauseManager : MonoBehaviour
     // Her frame çalışır
     void Update()
     {
-        // ESC tuşuna basıldığında pause/resume (PC test için)
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // ESC tuşuna basıldığında pause/resume (PC test için) - YENİ SİSTEM
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (isPaused)
             {
