@@ -8,7 +8,7 @@ public class PauseManager : MonoBehaviour
     public GameObject pausePanel;
 
     // Settings paneli (opsiyonel - pause içinde ayarlar için)
-    public GameObject settingsPanel;
+    //public GameObject settingsPanel;
 
     // Oyun duraklatıldı mı
     private bool isPaused = false;
@@ -56,13 +56,16 @@ public class PauseManager : MonoBehaviour
         pausePanel.SetActive(false);
 
         // Settings paneli açıksa onu da kapat
+        /*
         if (settingsPanel != null && settingsPanel.activeSelf)
         {
             settingsPanel.SetActive(false);
         }
+        */
     }
 
     // Settings panelini aç (pause içinde)
+    /*
     public void OpenSettings()
     {
         if (settingsPanel != null)
@@ -79,6 +82,7 @@ public class PauseManager : MonoBehaviour
             settingsPanel.SetActive(false);
         }
     }
+    */
 
     // Oyun duraklatılmış mı kontrol et (dışarıdan erişim için)
     public bool IsPaused()
