@@ -2,36 +2,43 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro; // YENİ - TextMeshPro için
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject settingsPanel;
     public Toggle soundToggle;
+    public TextMeshProUGUI highScoreDisplay; // YENİ - En yüksek skor text'i
 
-    // Oyun başladığında çalışır
     void Start()
     {
         // Toggle durumunu güncelle
         UpdateToggleState();
+
+        // En yüksek skoru göster
+        UpdateHighScoreDisplay();
     }
 
-    // Ayarlar menüsü her açıldığında toggle durumunu güncelle
+    // En yüksek skoru ekranda göster
+    void UpdateHighScoreDisplay()
+    {
+        // PlayerPrefs'ten en yüksek skoru al
+        int highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        // Text'i güncelle
+        highScoreDisplay.text = "High Score: " + highScore;
+    }
+
     public void OpenSettings()
     {
-        // Settings panelini göster
         settingsPanel.SetActive(true);
-
-        // Toggle durumunu güncelle
         UpdateToggleState();
     }
 
-    // Toggle durumunu AudioManager'dan al ve güncelle
     void UpdateToggleState()
     {
         if (AudioManager.Instance != null)
         {
-            // OnValueChanged event'ini tetiklememek için
-            // önce listener'ı kaldır, sonra tekrar ekle
             soundToggle.onValueChanged.RemoveAllListeners();
             soundToggle.isOn = AudioManager.Instance.IsSoundOn();
             soundToggle.onValueChanged.AddListener(AudioManager.Instance.ToggleSound);

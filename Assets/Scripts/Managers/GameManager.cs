@@ -1,6 +1,6 @@
-﻿// GameManager.cs
+﻿// GameManager.cs - GÜNCELLENMİŞ VERSİYON
 using UnityEngine;
-using TMPro; // TextMeshPro için
+using TMPro;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -14,14 +14,25 @@ public class GameManager : MonoBehaviour
     // Oyun bitince gösterilecek panel
     public GameObject gameOverPanel;
 
+    // Game Over panelindeki text'ler
+    public TextMeshProUGUI finalScoreText;      // YENİ - Mevcut skor
+    public TextMeshProUGUI highScoreText;       // YENİ - En yüksek skor
+
     // Oyuncunun puanı
     private int score = 0;
+
+    // En yüksek skor
+    private int highScore = 0;
 
     // Obje oluşturulmadan önce çalışır
     void Awake()
     {
         // Bu objeyi Instance olarak kaydet (singleton)
         Instance = this;
+
+        // En yüksek skoru yükle (PlayerPrefs'ten)
+        // Eğer daha önce kaydedilmemişse varsayılan 0
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
     // Puan ekle (Obstacle tarafından çağrılır)
@@ -37,6 +48,19 @@ public class GameManager : MonoBehaviour
     // Oyunu bitir (Obstacle tarafından çağrılır)
     public void GameOver()
     {
+        // En yüksek skoru kontrol et ve güncelle
+        if (score > highScore)
+        {
+            highScore = score;
+            // En yüksek skoru kaydet
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+        }
+
+        // Game Over panelindeki skorları güncelle
+        finalScoreText.text = "Score: " + score;
+        highScoreText.text = "High Score: " + highScore;
+
         // Oyunu durdur (zamanı dondur)
         Time.timeScale = 0;
 
@@ -62,5 +86,11 @@ public class GameManager : MonoBehaviour
 
         // Ana menü sahnesini yükle
         SceneManager.LoadScene("MainScene");
+    }
+
+    // En yüksek skoru döndür (dışarıdan erişim için)
+    public int GetHighScore()
+    {
+        return highScore;
     }
 }
