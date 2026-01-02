@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
+    
     void Start()
     {
         // Oyun müziğini başlat
@@ -43,6 +44,7 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.PlayGameMusic();
         }
     }
+    
 
     // Puan ekle (Obstacle tarafından çağrılır)
     public void AddScore()
@@ -62,18 +64,29 @@ public class GameManager : MonoBehaviour
     // Oyunu bitir (Obstacle tarafından çağrılır)
     public void GameOver()
     {
+        // Explosion efektini çalıştır
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        if (player != null)
+        {
+            ParticleSystem explosion = player.transform.Find("ExplosionParticles")?.GetComponent<ParticleSystem>();
+            if (explosion != null)
+            {
+                explosion.Play();
+            }
+        }
+
         // En yüksek skoru kontrol et ve güncelle
         if (score > highScore)
         {
             highScore = score;
-            // En yüksek skoru kaydet
             PlayerPrefs.SetInt("HighScore", highScore);
             PlayerPrefs.Save();
         }
 
         // Game Over panelindeki skorları güncelle
-        finalScoreText.text = "Score: " + score;
-        highScoreText.text = "High Score: " + highScore;
+        finalScoreText.text = "Skorunuz: " + score;
+        highScoreText.text = "En Yüksek: " + highScore;
 
         // Game Over sesi çal
         if (AudioManager.Instance != null)
@@ -81,7 +94,7 @@ public class GameManager : MonoBehaviour
             AudioManager.Instance.PlayGameOverSound();
         }
 
-        // Oyunu durdur (zamanı dondur)
+        // Oyunu durdur
         Time.timeScale = 0;
 
         // Game Over panelini göster

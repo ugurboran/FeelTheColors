@@ -1,11 +1,14 @@
-﻿// BallController.cs - YENİ INPUT SYSTEM İÇİN
+﻿// BallController.cs - GÜNCELLENMİŞ
 using UnityEngine;
-using UnityEngine.InputSystem; // YENİ SATIR
+using UnityEngine.InputSystem;
 
 public class BallController : MonoBehaviour
 {
     // Inspector'da ayarlanacak renkler dizisi
     public Color[] availableColors;
+
+    // Renk değişimi particle efekti (Inspector'da atanacak)
+    public ParticleSystem colorChangeParticles;
 
     // Şu anda hangi renkteyiz (0, 1, 2, 3...)
     private int currentColorIndex = 0;
@@ -23,7 +26,7 @@ public class BallController : MonoBehaviour
         ChangeColor();
     }
 
-    // Her frame'de çalışır (saniyede onlarca kez)
+    // Her frame'de çalışır
     void Update()
     {
         // MOUSE veya TOUCH kontrolü - YENİ SİSTEM
@@ -45,11 +48,13 @@ public class BallController : MonoBehaviour
     void ChangeColor()
     {
         // Sıradaki renk indexine geç (0->1->2->3->0...)
-        // % operatörü sayıyı sıfırlar (örn: 4 % 4 = 0)
         currentColorIndex = (currentColorIndex + 1) % availableColors.Length;
 
         // Sprite'ın rengini yeni renge ayarla
         spriteRenderer.color = availableColors[currentColorIndex];
+
+        // Particle efektini çalıştır
+        PlayColorChangeEffect();
 
         // Renk değişimi sesi çal
         if (AudioManager.Instance != null)
@@ -58,10 +63,45 @@ public class BallController : MonoBehaviour
         }
     }
 
+    /*
+    // Renk değişimi particle efektini çalıştır
+    void PlayColorChangeEffect()
+    {
+        if (colorChangeParticles != null)
+        {
+            // Particle'ın rengini topun yeni rengiyle aynı yap
+            var main = colorChangeParticles.main;
+            main.startColor = availableColors[currentColorIndex];
+
+            // Particle'ı çalıştır
+            colorChangeParticles.Play();
+        }
+    }
+    */
+
     // Dışarıdan şu anki rengi almak için (Obstacle kullanacak)
     public Color GetCurrentColor()
     {
         // Şu anki rengi döndür
         return availableColors[currentColorIndex];
+    }
+
+    void PlayColorChangeEffect()
+    {
+        Debug.Log("PlayColorChangeEffect çağrıldı!"); // TEST LOG
+
+        if (colorChangeParticles != null)
+        {
+            Debug.Log("Particle bulundu, çalıştırılıyor!"); // TEST LOG
+
+            var main = colorChangeParticles.main;
+            main.startColor = availableColors[currentColorIndex];
+
+            colorChangeParticles.Play();
+        }
+        else
+        {
+            Debug.Log("HATA: colorChangeParticles NULL!"); // HATA LOG
+        }
     }
 }

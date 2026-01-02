@@ -1,4 +1,4 @@
-﻿// Obstacle.cs
+﻿// Obstacle.cs - GÜNCELLENMİŞ
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
@@ -38,7 +38,22 @@ public class Obstacle : MonoBehaviour
             {
                 // RENKLER UYUŞUYOR - Puan kazan
                 GameManager.Instance.AddScore();
+
+                // Puan efektini çalıştır (Player'daki particle)
+                PlayScoreEffect(other.gameObject);
             }
+        }
+    }
+
+    // Puan kazanma efektini çalıştır
+    void PlayScoreEffect(GameObject player)
+    {
+        // Player'daki ScoreParticles'ı bul ve çalıştır
+        ParticleSystem scoreParticles = player.transform.Find("ScoreParticles")?.GetComponent<ParticleSystem>();
+
+        if (scoreParticles != null)
+        {
+            scoreParticles.Play();
         }
     }
 }
