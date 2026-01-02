@@ -93,4 +93,10 @@ public class GameManager : MonoBehaviour
     {
         return highScore;
     }
+
+    // Mevcut skoru döndür (dışarıdan erişim için)
+    public int GetCurrentScore()
+    {
+        return score;
+    }
 }
