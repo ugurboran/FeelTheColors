@@ -17,6 +17,12 @@ public class MenuManager : MonoBehaviour
 
         // En yüksek skoru göster
         UpdateHighScoreDisplay();
+
+        // Menü müziğini başlat
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayMenuMusic();
+        }
     }
 
     // En yüksek skoru ekranda göster

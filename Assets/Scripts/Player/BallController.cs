@@ -50,6 +50,12 @@ public class BallController : MonoBehaviour
 
         // Sprite'ın rengini yeni renge ayarla
         spriteRenderer.color = availableColors[currentColorIndex];
+
+        // Renk değişimi sesi çal
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayColorChangeSound();
+        }
     }
 
     // Dışarıdan şu anki rengi almak için (Obstacle kullanacak)
