@@ -35,15 +35,19 @@ public class GameManager : MonoBehaviour
         highScore = PlayerPrefs.GetInt("HighScore", 0);
     }
 
-    
+    /*
     void Start()
     {
+        // Müziği geciktirerek başlat
+        Invoke("PlayGameMusic", 0.1f);
+
         // Oyun müziğini başlat
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayGameMusic();
         }
     }
+    */
     
 
     // Puan ekle (Obstacle tarafından çağrılır)
@@ -53,7 +57,7 @@ public class GameManager : MonoBehaviour
         score++;
 
         // UI'daki text'i güncelle
-        scoreText.text = "Skor: " + score;
+        scoreText.text = "SCORE: " + score;
 
         if (AudioManager.Instance != null)
         {
@@ -85,8 +89,8 @@ public class GameManager : MonoBehaviour
         }
 
         // Game Over panelindeki skorları güncelle
-        finalScoreText.text = "Skorunuz: " + score;
-        highScoreText.text = "En Yüksek: " + highScore;
+        finalScoreText.text = "Your score: " + score;
+        highScoreText.text = "High Score: " + highScore;
 
         // Game Over sesi çal
         if (AudioManager.Instance != null)

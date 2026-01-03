@@ -18,11 +18,16 @@ public class MenuManager : MonoBehaviour
         // En yüksek skoru göster
         UpdateHighScoreDisplay();
 
+        /*
+        // Müziği 0.1 saniye sonra başlat (thread problemi önlenir)
+        Invoke("PlayMenuMusic", 0.1f);
+
         // Menü müziğini başlat
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayMenuMusic();
         }
+        */
     }
 
     // En yüksek skoru ekranda göster
