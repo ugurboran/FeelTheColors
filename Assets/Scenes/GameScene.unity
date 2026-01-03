@@ -281,6 +281,7 @@ GameObject:
   - component: {fileID: 157764191}
   - component: {fileID: 157764190}
   - component: {fileID: 157764189}
+  - component: {fileID: 157764192}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -402,6 +403,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157764187}
   m_CullTransparentMesh: 1
+--- !u!114 &157764192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157764187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa570028645505408fff8deb6013bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  scaleMultiplier: 0.95
+  animationSpeed: 15
 --- !u!1 &363326403
 GameObject:
   m_ObjectHideFlags: 0
@@ -11664,6 +11679,7 @@ GameObject:
   - component: {fileID: 1310825080}
   - component: {fileID: 1310825079}
   - component: {fileID: 1310825078}
+  - component: {fileID: 1310825081}
   m_Layer: 5
   m_Name: ResumeButton
   m_TagString: Untagged
@@ -11785,6 +11801,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1310825076}
   m_CullTransparentMesh: 1
+--- !u!114 &1310825081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310825076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa570028645505408fff8deb6013bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  scaleMultiplier: 0.95
+  animationSpeed: 15
 --- !u!1 &1327630569
 GameObject:
   m_ObjectHideFlags: 0
@@ -12389,6 +12419,7 @@ GameObject:
   - component: {fileID: 1537014125}
   - component: {fileID: 1537014124}
   - component: {fileID: 1537014123}
+  - component: {fileID: 1537014126}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -12510,6 +12541,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537014121}
   m_CullTransparentMesh: 1
+--- !u!114 &1537014126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1537014121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa570028645505408fff8deb6013bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  scaleMultiplier: 0.95
+  animationSpeed: 15
 --- !u!1 &1577378807
 GameObject:
   m_ObjectHideFlags: 0
@@ -12522,6 +12567,7 @@ GameObject:
   - component: {fileID: 1577378811}
   - component: {fileID: 1577378810}
   - component: {fileID: 1577378809}
+  - component: {fileID: 1577378812}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -12631,6 +12677,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1577378807}
   m_CullTransparentMesh: 1
+--- !u!114 &1577378812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1577378807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa570028645505408fff8deb6013bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  scaleMultiplier: 0.95
+  animationSpeed: 15
 --- !u!1 &1588348666
 GameObject:
   m_ObjectHideFlags: 0
@@ -17752,6 +17812,7 @@ GameObject:
   - component: {fileID: 1691133443}
   - component: {fileID: 1691133442}
   - component: {fileID: 1691133441}
+  - component: {fileID: 1691133444}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -17873,6 +17934,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691133439}
   m_CullTransparentMesh: 1
+--- !u!114 &1691133444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691133439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa570028645505408fff8deb6013bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  scaleMultiplier: 0.95
+  animationSpeed: 15
 --- !u!1 &1864023334
 GameObject:
   m_ObjectHideFlags: 0
@@ -22944,6 +23019,7 @@ GameObject:
   - component: {fileID: 2060194535}
   - component: {fileID: 2060194534}
   - component: {fileID: 2060194533}
+  - component: {fileID: 2060194536}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -23065,6 +23141,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060194531}
   m_CullTransparentMesh: 1
+--- !u!114 &2060194536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2060194531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa570028645505408fff8deb6013bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  scaleMultiplier: 0.95
+  animationSpeed: 15
 --- !u!1 &2068380660
 GameObject:
   m_ObjectHideFlags: 0
@@ -23183,6 +23273,7 @@ GameObject:
   - component: {fileID: 2106894866}
   - component: {fileID: 2106894865}
   - component: {fileID: 2106894864}
+  - component: {fileID: 2106894867}
   m_Layer: 5
   m_Name: PauseButton
   m_TagString: Untagged
@@ -23304,6 +23395,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106894862}
   m_CullTransparentMesh: 1
+--- !u!114 &2106894867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106894862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa570028645505408fff8deb6013bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonAnimator
+  scaleMultiplier: 0.95
+  animationSpeed: 15
 --- !u!1 &2110298122
 GameObject:
   m_ObjectHideFlags: 0
