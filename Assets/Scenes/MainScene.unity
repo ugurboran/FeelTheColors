@@ -2235,11 +2235,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58f8784c9f60bf342a1d37ec2179a8da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  colorChangeSound: {fileID: 8300000, guid: 1ef3fb5e01de0844f9229da023ee022e, type: 3}
-  scoreSound: {fileID: 8300000, guid: 9c47e2c90ba61034cb3942be945dda8a, type: 3}
+  colorChangeSound: {fileID: 8300000, guid: 7da26a1fae31a7141ba804ef7cb2a5aa, type: 3}
+  scoreSound: {fileID: 8300000, guid: 060a19bbfbf51db4dbf21f4317bf21a7, type: 3}
   gameOverSound: {fileID: 8300000, guid: 265b0db887bc2264baa466aa417c2efc, type: 3}
-  buttonClickSound: {fileID: 8300000, guid: 7da26a1fae31a7141ba804ef7cb2a5aa, type: 3}
-  menuMusic: {fileID: 0}
+  buttonClickSound: {fileID: 8300000, guid: 9c47e2c90ba61034cb3942be945dda8a, type: 3}
+  menuMusic: {fileID: 8300000, guid: 2cb497f777b1bd64391c7619f446d52f, type: 3}
   gameMusic: {fileID: 0}
 --- !u!1 &1420127666
 GameObject:

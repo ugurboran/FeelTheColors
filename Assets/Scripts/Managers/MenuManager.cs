@@ -1,33 +1,44 @@
-﻿// MenuManager.cs - GÜNCELLENMİŞ
+﻿// MenuManager.cs - MÜZİK EKLENMİŞ VERSİYON
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro; // YENİ - TextMeshPro için
+using TMPro;
+using System.Collections; // IEnumerator için gerekli
 
 public class MenuManager : MonoBehaviour
 {
     public GameObject settingsPanel;
     public Toggle soundToggle;
-    public TextMeshProUGUI highScoreDisplay; // YENİ - En yüksek skor text'i
+    public TextMeshProUGUI highScoreDisplay;
 
     void Start()
     {
+        // Coroutine ile müzik başlatma
+        StartCoroutine(InitializeMenu());
+    }
+
+    // Menü başlatma - AudioManager'ı bekler
+    IEnumerator InitializeMenu()
+    {
+        // Bir frame bekle (AudioManager yüklensin)
+        yield return null;
+
         // Toggle durumunu güncelle
         UpdateToggleState();
 
         // En yüksek skoru göster
         UpdateHighScoreDisplay();
 
-        /*
-        // Müziği 0.1 saniye sonra başlat (thread problemi önlenir)
-        Invoke("PlayMenuMusic", 0.1f);
-
         // Menü müziğini başlat
         if (AudioManager.Instance != null)
         {
+            Debug.Log("🎵 Menü müziği başlatılıyor");
             AudioManager.Instance.PlayMenuMusic();
         }
-        */
+        else
+        {
+            Debug.LogError("❌ AudioManager bulunamadı!");
+        }
     }
 
     // En yüksek skoru ekranda göster
@@ -42,6 +53,12 @@ public class MenuManager : MonoBehaviour
 
     public void OpenSettings()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+
         settingsPanel.SetActive(true);
         UpdateToggleState();
     }
@@ -58,16 +75,34 @@ public class MenuManager : MonoBehaviour
 
     public void PlayGame()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+
         SceneManager.LoadScene("GameScene");
     }
 
     public void CloseSettings()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+
         settingsPanel.SetActive(false);
     }
 
     public void QuitGame()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+
         Debug.Log("Oyun kapatılıyor");
         Application.Quit();
     }

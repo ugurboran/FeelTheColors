@@ -108,6 +108,11 @@ public class GameManager : MonoBehaviour
     // Oyunu yeniden başlat (UI Button tarafından çağrılır)
     public void RestartGame()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
         // Zamanı normale döndür
         Time.timeScale = 1;
 
@@ -118,6 +123,11 @@ public class GameManager : MonoBehaviour
     // Ana menüye dön (Button tarafından çağrılır)
     public void LoadMainMenu()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
         // Zamanı normale döndür
         Time.timeScale = 1;
 

@@ -33,6 +33,12 @@ public class PauseManager : MonoBehaviour
     // Oyunu duraklat - PauseButton çağırır
     public void PauseGame()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+
         // Oyun duraklatıldı olarak işaretle
         isPaused = true;
 
@@ -46,6 +52,12 @@ public class PauseManager : MonoBehaviour
     // Oyuna devam et - ResumeButton çağırır
     public void ResumeGame()
     {
+        // BUTON SESİ ÇAL
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlayButtonClickSound();
+        }
+
         // Oyun devam ediyor olarak işaretle
         isPaused = false;
 
