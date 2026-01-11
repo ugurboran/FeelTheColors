@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour
 {
     public GameObject settingsPanel;
     public Toggle soundToggle;
+    public Toggle musicToggle; // YENİ - Müzik toggle'ı
     public TextMeshProUGUI highScoreDisplay;
 
     void Start()
@@ -70,6 +71,11 @@ public class MenuManager : MonoBehaviour
             soundToggle.onValueChanged.RemoveAllListeners();
             soundToggle.isOn = AudioManager.Instance.IsSoundOn();
             soundToggle.onValueChanged.AddListener(AudioManager.Instance.ToggleSound);
+
+            // Müzik toggle - YENİ
+            musicToggle.onValueChanged.RemoveAllListeners();
+            musicToggle.isOn = AudioManager.Instance.IsMusicOn();
+            musicToggle.onValueChanged.AddListener(AudioManager.Instance.ToggleMusic);
         }
     }
 

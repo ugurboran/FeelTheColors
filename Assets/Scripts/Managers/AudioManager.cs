@@ -1,4 +1,4 @@
-﻿// AudioManager.cs - GENİŞLETİLMİŞ VERSİYON
+﻿// AudioManager.cs - MÜZİK TOGGLE EKLENMİŞ VERSİYON
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -8,6 +8,9 @@ public class AudioManager : MonoBehaviour
 
     // Ses açık mı kapalı mı
     private bool isSoundOn = true;
+
+    // Müzik açık mı kapalı mı - YENİ
+    private bool isMusicOn = true;
 
     // Audio Source bileşenleri
     private AudioSource musicSource;     // Müzik için
@@ -45,8 +48,9 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // Kaydedilmiş ses ayarını yükle (1 = açık, 0 = kapalı)
+        // Kaydedilmiş ses ayarlarını yükle (1 = açık, 0 = kapalı)
         isSoundOn = PlayerPrefs.GetInt("Sound", 1) == 1;
+        isMusicOn = PlayerPrefs.GetInt("Music", 1) == 1; // YENİ
 
         // Ses seviyesini ayarla
         UpdateVolume();
@@ -71,29 +75,58 @@ public class AudioManager : MonoBehaviour
     // Ses seviyesini güncelle
     void UpdateVolume()
     {
-        float volume = isSoundOn ? 1f : 0f;
-
-        if (musicSource != null)
-        {
-            musicSource.volume = isSoundOn ? 0.5f : 0f;
-        }
-
+        // Ses efektleri volume
         if (sfxSource != null)
         {
-            sfxSource.volume = volume;
+            sfxSource.volume = isSoundOn ? 1f : 0f;
+        }
+
+        // Müzik volume - YENİ
+        if (musicSource != null)
+        {
+            musicSource.volume = isMusicOn ? 0.5f : 0f;
         }
     }
 
-    // Sesi aç/kapat - Toggle çağırır
+    // Ses efektlerini aç/kapat - Toggle çağırır
     public void ToggleSound(bool isOn)
     {
         isSoundOn = isOn;
 
-        // Ses seviyesini ayarla
-        UpdateVolume();
+        // Ses efektleri seviyesini ayarla
+        if (sfxSource != null)
+        {
+            sfxSource.volume = isOn ? 1f : 0f;
+        }
 
         // Ayarı kaydet
         PlayerPrefs.SetInt("Sound", isOn ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    // Müziği aç/kapat - YENİ
+    public void ToggleMusic(bool isOn)
+    {
+        isMusicOn = isOn;
+
+        if (musicSource != null)
+        {
+            musicSource.volume = isOn ? 0.5f : 0f;
+
+            // Eğer kapatılıyorsa müziği durdur
+            if (!isOn && musicSource.isPlaying)
+            {
+                musicSource.Pause();
+            }
+            // Eğer açılıyorsa ve durdurulmuşsa devam ettir
+            else if (isOn && !musicSource.isPlaying && musicSource.clip != null)
+            {
+                musicSource.Play();
+            }
+        }
+
+        // Ayarı kaydet
+        PlayerPrefs.SetInt("Music", isOn ? 1 : 0);
         PlayerPrefs.Save();
     }
 
@@ -101,6 +134,12 @@ public class AudioManager : MonoBehaviour
     public bool IsSoundOn()
     {
         return isSoundOn;
+    }
+
+    // Müziğin durumunu kontrol et - YENİ
+    public bool IsMusicOn()
+    {
+        return isMusicOn;
     }
 
     // Ses efekti çal
@@ -123,7 +162,8 @@ public class AudioManager : MonoBehaviour
 
             musicSource.clip = clip;
 
-            if (isSoundOn)
+            // Müzik açıksa çal - DEĞİŞTİRİLDİ
+            if (isMusicOn)
             {
                 musicSource.Play();
             }
