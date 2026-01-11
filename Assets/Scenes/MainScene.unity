@@ -2041,56 +2041,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1059802958}
   m_CullTransparentMesh: 1
---- !u!1 &1137045281
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1137045283}
-  - component: {fileID: 1137045282}
-  m_Layer: 0
-  m_Name: AudioManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1137045282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137045281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58f8784c9f60bf342a1d37ec2179a8da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
-  colorChangeSound: {fileID: 8300000, guid: 7da26a1fae31a7141ba804ef7cb2a5aa, type: 3}
-  scoreSound: {fileID: 8300000, guid: 6e07a7695c2e23f47ab5eb9d2e7ef686, type: 3}
-  gameOverSound: {fileID: 0}
-  buttonClickSound: {fileID: 8300000, guid: 9c47e2c90ba61034cb3942be945dda8a, type: 3}
-  menuMusic: {fileID: 0}
-  gameMusic: {fileID: 0}
---- !u!4 &1137045283
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1137045281}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 855.1494, y: 225.73425, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1268979690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2241,6 +2191,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1404468731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1404468732}
+  - component: {fileID: 1404468733}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1404468732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404468731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 591.3101, y: 167.54735, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1404468733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404468731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58f8784c9f60bf342a1d37ec2179a8da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManager
+  colorChangeSound: {fileID: 8300000, guid: 1ef3fb5e01de0844f9229da023ee022e, type: 3}
+  scoreSound: {fileID: 8300000, guid: 9c47e2c90ba61034cb3942be945dda8a, type: 3}
+  gameOverSound: {fileID: 8300000, guid: 265b0db887bc2264baa466aa417c2efc, type: 3}
+  buttonClickSound: {fileID: 8300000, guid: 7da26a1fae31a7141ba804ef7cb2a5aa, type: 3}
+  menuMusic: {fileID: 0}
+  gameMusic: {fileID: 0}
 --- !u!1 &1420127666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2774,4 +2774,4 @@ SceneRoots:
   - {fileID: 1268979694}
   - {fileID: 1900891877}
   - {fileID: 1297536409}
-  - {fileID: 1137045283}
+  - {fileID: 1404468732}
