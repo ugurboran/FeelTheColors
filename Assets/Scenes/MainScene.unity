@@ -1281,7 +1281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7165ccfad69b0364087053e7a1f0acc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateImage
-  rotationSpeed: 20
+  rotationSpeed: 25
   clockwise: 1
 --- !u!114 &570614877
 MonoBehaviour:
@@ -2991,8 +2991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7165ccfad69b0364087053e7a1f0acc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateImage
-  rotationSpeed: 20
-  clockwise: 1
+  rotationSpeed: 25
+  clockwise: 0
 --- !u!114 &1469619712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3081,7 +3081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7165ccfad69b0364087053e7a1f0acc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RotateImage
-  rotationSpeed: 20
+  rotationSpeed: 25
   clockwise: 1
 --- !u!114 &1610179612
 MonoBehaviour:
