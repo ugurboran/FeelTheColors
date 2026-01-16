@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     // Singleton pattern - Tüm scriptlerden erişilebilir tek instance
     public static GameManager Instance;
 
+    // Game Over durumunu kontrol için - YENİ
+    public static bool IsGameOver { get; private set; } = false;
+
     // Skoru gösterecek UI Text bileşeni
     public TextMeshProUGUI scoreText;
 
@@ -33,6 +36,9 @@ public class GameManager : MonoBehaviour
         // En yüksek skoru yükle (PlayerPrefs'ten)
         // Eğer daha önce kaydedilmemişse varsayılan 0
         highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        // Oyun başladığında GameOver durumunu sıfırla - YENİ
+        IsGameOver = false;
     }
 
     /*
@@ -48,7 +54,7 @@ public class GameManager : MonoBehaviour
         }
     }
     */
-    
+
 
     // Puan ekle (Obstacle tarafından çağrılır)
     public void AddScore()
@@ -68,6 +74,8 @@ public class GameManager : MonoBehaviour
     // Oyunu bitir (Obstacle tarafından çağrılır)
     public void GameOver()
     {
+        IsGameOver = true; // YENİ - Hemen işaretle
+
         // Explosion efektini çalıştır
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
@@ -113,6 +121,9 @@ public class GameManager : MonoBehaviour
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
+
+        IsGameOver = false; // YENİ - Sıfırla
+
         // Zamanı normale döndür
         Time.timeScale = 1;
 
@@ -128,6 +139,9 @@ public class GameManager : MonoBehaviour
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
+
+        IsGameOver = false; // YENİ - Sıfırla
+
         // Zamanı normale döndür
         Time.timeScale = 1;
 

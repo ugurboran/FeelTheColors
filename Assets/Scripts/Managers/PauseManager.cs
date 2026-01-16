@@ -13,6 +13,9 @@ public class PauseManager : MonoBehaviour
     // Oyun duraklatıldı mı
     private bool isPaused = false;
 
+    // BallController'ın kontrol edebilmesi için public - YENİ
+    public static bool IsGamePaused { get; private set; } = false;
+
     // Her frame çalışır
     void Update()
     {
@@ -33,14 +36,16 @@ public class PauseManager : MonoBehaviour
     // Oyunu duraklat - PauseButton çağırır
     public void PauseGame()
     {
+        // Oyun duraklatıldı olarak işaretle
+        isPaused = true;
+
+        IsGamePaused = true; // YENİ - Hemen işaretle
+
         // BUTON SESİ ÇAL
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-
-        // Oyun duraklatıldı olarak işaretle
-        isPaused = true;
 
         // Zamanı durdur
         Time.timeScale = 0f;
@@ -52,14 +57,16 @@ public class PauseManager : MonoBehaviour
     // Oyuna devam et - ResumeButton çağırır
     public void ResumeGame()
     {
+        // Oyun devam ediyor olarak işaretle
+        isPaused = false;
+
+        IsGamePaused = false; // YENİ - İşareti kaldır
+
         // BUTON SESİ ÇAL
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayButtonClickSound();
         }
-
-        // Oyun devam ediyor olarak işaretle
-        isPaused = false;
 
         // Zamanı normale döndür
         Time.timeScale = 1f;
