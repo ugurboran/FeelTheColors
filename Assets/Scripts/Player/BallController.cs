@@ -1,6 +1,8 @@
 ﻿// BallController.cs - GÜNCELLENMİŞ
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems; // YENİ
+
 
 public class BallController : MonoBehaviour
 {
@@ -38,16 +40,41 @@ public class BallController : MonoBehaviour
         // MOUSE veya TOUCH kontrolü - YENİ SİSTEM
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
-            // Fare ile tıklama
-            ChangeColor();
+            // Fare UI üzerinde mi kontrol et - YENİ
+            if (!IsPointerOverUI())
+            {
+                ChangeColor();
+            }
         }
 
         // Dokunmatik ekran kontrolü
         if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame)
         {
-            // Mobil dokunuş
-            ChangeColor();
+            // Dokunuş UI üzerinde mi kontrol et - YENİ
+            if (!IsPointerOverUI())
+            {
+                ChangeColor();
+            }
         }
+    }
+
+    // UI üzerinde mi kontrol et - YENİ FONKSİYON
+    bool IsPointerOverUI()
+    {
+        // Mouse için
+        if (Mouse.current != null)
+        {
+            return EventSystem.current.IsPointerOverGameObject();
+        }
+
+        // Touch için
+        if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+        {
+            int touchId = Touchscreen.current.primaryTouch.touchId.ReadValue();
+            return EventSystem.current.IsPointerOverGameObject(touchId);
+        }
+
+        return false;
     }
 
     // Topun rengini bir sonraki renge değiştirir
