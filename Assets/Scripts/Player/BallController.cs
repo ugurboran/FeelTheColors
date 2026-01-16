@@ -29,8 +29,8 @@ public class BallController : MonoBehaviour
     // Her frame'de çalışır
     void Update()
     {
-        // Oyun durdurulmuşsa dokunuşları algılama - YENİ
-        if (Time.timeScale == 0f)
+        // Oyun pause veya game over ise dokunuşları algılama - YENİ
+        if (PauseManager.IsGamePaused || GameManager.IsGameOver)
         {
             return; // Hiçbir şey yapma
         }
