@@ -29,6 +29,12 @@ public class BallController : MonoBehaviour
     // Her frame'de çalışır
     void Update()
     {
+        // Oyun durdurulmuşsa dokunuşları algılama - YENİ
+        if (Time.timeScale == 0f)
+        {
+            return; // Hiçbir şey yapma
+        }
+
         // MOUSE veya TOUCH kontrolü - YENİ SİSTEM
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
         {
