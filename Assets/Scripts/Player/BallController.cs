@@ -18,11 +18,25 @@ public class BallController : MonoBehaviour
     // Topun rengini değiştirmek için sprite renderer bileşeni
     private SpriteRenderer spriteRenderer;
 
+    private TrailRenderer trailRenderer; // YENİ
+
     // Oyun başladığında bir kez çalışır
     void Start()
     {
         // Bu objenin sprite renderer bileşenini al
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        trailRenderer = GetComponentInChildren<TrailRenderer>(); // YENİ
+
+        // DEBUG LOG - YENİ
+        if (trailRenderer != null)
+        {
+            Debug.Log("✅ Trail Renderer bulundu!");
+        }
+        else
+        {
+            Debug.LogError("❌ Trail Renderer BULUNAMADI!");
+        }
 
         // İlk rengi ayarla
         ChangeColor();
@@ -31,6 +45,8 @@ public class BallController : MonoBehaviour
     // Her frame'de çalışır
     void Update()
     {
+
+
         // Oyun pause veya game over ise dokunuşları algılama - YENİ
         if (PauseManager.IsGamePaused || GameManager.IsGameOver)
         {
@@ -86,6 +102,9 @@ public class BallController : MonoBehaviour
         // Sprite'ın rengini yeni renge ayarla
         spriteRenderer.color = availableColors[currentColorIndex];
 
+        // Trail rengini de değiştir - YENİ
+        UpdateTrailColor();
+
         // Particle efektini çalıştır
         PlayColorChangeEffect();
 
@@ -93,6 +112,46 @@ public class BallController : MonoBehaviour
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlayColorChangeSound();
+        }
+    }
+
+    // Trail rengini güncelle - YENİ FONKSİYON
+    void UpdateTrailColor()
+    {
+
+        Debug.Log("🎨 UpdateTrailColor çağrıldı"); // DEBUG LOG
+
+
+        if (trailRenderer != null)
+        {
+
+            Debug.Log("✅ Trail rengini değiştiriyoruz"); // DEBUG LOG
+
+            // Gradient oluştur (baştan sona fade)
+            Gradient gradient = new Gradient();
+
+            // Renk noktaları
+            GradientColorKey[] colorKeys = new GradientColorKey[2];
+            colorKeys[0].color = availableColors[currentColorIndex];
+            colorKeys[0].time = 0f;
+            colorKeys[1].color = availableColors[currentColorIndex];
+            colorKeys[1].time = 1f;
+
+            // Alpha noktaları (baştan sona fade out)
+            GradientAlphaKey[] alphaKeys = new GradientAlphaKey[2];
+            alphaKeys[0].alpha = 1f;
+            alphaKeys[0].time = 0f;
+            alphaKeys[1].alpha = 0f;
+            alphaKeys[1].time = 1f;
+
+            gradient.SetKeys(colorKeys, alphaKeys);
+
+            // Trail'e uygula
+            trailRenderer.colorGradient = gradient;
+        }
+        else
+        {
+            Debug.LogError("❌ trailRenderer NULL!"); // DEBUG LOG
         }
     }
 
