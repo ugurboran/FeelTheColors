@@ -279,12 +279,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 26787152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dce35d04b109574ab3b2c1cd590057e, type: 3}
+  m_Script: {fileID: 11500000, guid: 32554153b973bbd4aa8d8796290cd2e6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BallPulse
-  pulseSpeed: 0.3
-  pulseAmount: 0.1
-  originalScale: {x: 0, y: 0, z: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::BallAnimations
+  pulseDuration: 0.8
+  pulseScale: 0.5
+  pulseEase: 4
+  floatDuration: 4
+  floatHeight: 0.15
+  floatEase: 4
+  enableRotation: 1
+  rotationDuration: 3
+  rotationEase: 1
 --- !u!1 &157764187
 GameObject:
   m_ObjectHideFlags: 0

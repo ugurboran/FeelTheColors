@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems; // YENİ
+using DG.Tweening; // Üste ekle
 
 
 public class BallController : MonoBehaviour
@@ -98,6 +99,13 @@ public class BallController : MonoBehaviour
     {
         // Sıradaki renk indexine geç (0->1->2->3->0...)
         currentColorIndex = (currentColorIndex + 1) % availableColors.Length;
+
+        // Renk değişimi animasyonu - YENİ
+        spriteRenderer.DOColor(availableColors[currentColorIndex], 0.2f)
+            .SetEase(Ease.OutQuad);
+
+        // Punch scale (hafif büyüyüp küçülme)
+        transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 5, 0.5f);
 
         // Sprite'ın rengini yeni renge ayarla
         spriteRenderer.color = availableColors[currentColorIndex];
