@@ -4,18 +4,30 @@ using DG.Tweening;
 
 public class TrailHelperDOTween : MonoBehaviour
 {
-    public float moveDuration = 1f;
-    public float moveDistance = 0.15f;
+    [Header("Hareket Ayarları")]
+    public float moveDuration = 1.5f;
+    public float moveDistance = 0.12f;
+    public Ease moveEase = Ease.InOutSine;
 
-    private Vector3 startPos;
+    private Vector3 startLocalPos;
+    private Tween moveTween;
 
     void Start()
     {
-        startPos = transform.localPosition;
+        startLocalPos = transform.localPosition;
+        StartMovement();
+    }
 
-        // Sağa-sola smooth hareket
-        transform.DOLocalMoveX(startPos.x + moveDistance, moveDuration)
-            .SetEase(Ease.InOutSine)
+    void StartMovement()
+    {
+        // Sağa-sola yumuşak hareket
+        moveTween = transform.DOLocalMoveX(startLocalPos.x + moveDistance, moveDuration)
+            .SetEase(moveEase)
             .SetLoops(-1, LoopType.Yoyo);
+    }
+
+    void OnDestroy()
+    {
+        moveTween?.Kill();
     }
 }

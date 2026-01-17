@@ -13,6 +13,11 @@ public class BallController : MonoBehaviour
     // Renk değişimi particle efekti (Inspector'da atanacak)
     public ParticleSystem colorChangeParticles;
 
+    [Header("Renk Değişim Animasyonu")]
+    public float colorTransitionDuration = 0.2f;
+    public float punchScaleAmount = 0.1f;
+    public float punchDuration = 0.3f;
+
     // Şu anda hangi renkteyiz (0, 1, 2, 3...)
     private int currentColorIndex = 0;
 
@@ -27,7 +32,15 @@ public class BallController : MonoBehaviour
         // Bu objenin sprite renderer bileşenini al
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        trailRenderer = GetComponentInChildren<TrailRenderer>(); // YENİ
+        // TrailHelper altındaki Trail'i bul
+        Transform trailHelper = transform.Find("TrailHelper");
+        if (trailHelper != null)
+        {
+            trailRenderer = trailHelper.GetComponentInChildren<TrailRenderer>();
+        }
+
+        // İlk rengi ayarla (animasyonsuz)
+        spriteRenderer.color = availableColors[currentColorIndex];
 
         // DEBUG LOG - YENİ
         if (trailRenderer != null)
@@ -101,11 +114,22 @@ public class BallController : MonoBehaviour
         currentColorIndex = (currentColorIndex + 1) % availableColors.Length;
 
         // Renk değişimi animasyonu - YENİ
-        spriteRenderer.DOColor(availableColors[currentColorIndex], 0.2f)
-            .SetEase(Ease.OutQuad);
+        //spriteRenderer.DOColor(availableColors[currentColorIndex], 0.2f)
+        //    .SetEase(Ease.OutQuad);
 
         // Punch scale (hafif büyüyüp küçülme)
-        transform.DOPunchScale(Vector3.one * 0.2f, 0.3f, 5, 0.5f);
+        //transform.DOPunchScale(Vector3.one * 0.1f, 0.3f, 5, 0.5f);
+
+        // 1. Renk geçişi (smooth color transition)
+        spriteRenderer.DOColor(availableColors[currentColorIndex], colorTransitionDuration)
+            .SetEase(Ease.OutQuad);
+
+        // 2. Hafif zıplama (punch scale)
+        transform.DOPunchScale(Vector3.one * punchScaleAmount, punchDuration, 5, 0.5f)
+            .OnComplete(() => {
+                // Animasyon bitince scale'i garantile
+                transform.localScale = Vector3.one;
+            });
 
         // Sprite'ın rengini yeni renge ayarla
         spriteRenderer.color = availableColors[currentColorIndex];
