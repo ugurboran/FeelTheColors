@@ -23216,8 +23216,8 @@ MonoBehaviour:
   happyFace: {fileID: -111053705, guid: a8f345b73d4e36c419bced8f291f4cea, type: 3}
   excitedFace: {fileID: 79494568, guid: cdf231177ca42c94ebacac929d08939c, type: 3}
   sadFace: {fileID: -32054023, guid: 5f24f4cdac8fd6f4897623a2903a62f5, type: 3}
-  expressionDuration: 1
-  punchScale: 0.05
+  expressionDuration: 1.25
+  punchScale: 0.01
 --- !u!1 &2005554134
 GameObject:
   m_ObjectHideFlags: 0
