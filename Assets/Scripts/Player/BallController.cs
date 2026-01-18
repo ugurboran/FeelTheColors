@@ -134,6 +134,13 @@ public class BallController : MonoBehaviour
                 transform.localScale = Vector3.one;
             });
 
+        // Yüz ifadesi - YENİ! ✨
+        FaceController face = GetComponentInChildren<FaceController>();
+        if (face != null)
+        {
+            face.ShowExcited();
+        }
+
         // Sprite'ın rengini yeni renge ayarla
         spriteRenderer.color = availableColors[currentColorIndex];
 

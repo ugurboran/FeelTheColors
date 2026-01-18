@@ -86,7 +86,17 @@ public class GameManager : MonoBehaviour
             {
                 explosion.Play();
             }
+
+            // Üzgün yüz - YENİ! ✨
+            FaceController face = player.GetComponentInChildren<FaceController>();
+            if (face != null)
+            {
+                face.ShowSad();
+            }
+
         }
+
+
 
         // En yüksek skoru kontrol et ve güncelle
         if (score > highScore)

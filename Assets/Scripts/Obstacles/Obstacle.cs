@@ -39,6 +39,13 @@ public class Obstacle : MonoBehaviour
                 // RENKLER UYUŞUYOR - Puan kazan
                 GameManager.Instance.AddScore();
 
+                // Mutlu yüz - YENİ! ✨
+                FaceController face = other.GetComponentInChildren<FaceController>();
+                if (face != null)
+                {
+                    face.ShowHappy();
+                }
+
                 // Puan efektini çalıştır (Player'daki particle)
                 PlayScoreEffect(other.gameObject);
             }
