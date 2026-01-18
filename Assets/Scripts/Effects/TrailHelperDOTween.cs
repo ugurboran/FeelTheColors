@@ -1,33 +1,57 @@
-﻿// TrailHelperDOTween.cs
-using UnityEngine;
+﻿// TrailHelperDOTween.cs - SADECE SOLA KUYRUK
 using DG.Tweening;
+using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor;
+using UnityEngine;
+using UnityEngine.SocialPlatforms;
+using UnityEngine.Timeline;
+using UnityEngine.UIElements;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEditor.Progress;
+using static UnityEditorInternal.ReorderableList;
+using Sequence = DG.Tweening.Sequence;
 
 public class TrailHelperDOTween : MonoBehaviour
 {
-    [Header("Hareket Ayarları")]
-    public float moveDuration = 1.5f;
-    public float moveDistance = 0.12f;
-    public Ease moveEase = Ease.InOutSine;
+    [Header("Kuyruk Ayarları")]
+    public float speed = 2f;              // Hareket süresi (daha uzun)
+    public float distance = 0.5f;         // Ne kadar SAĞA gidecek
+    public float resetDelay = 0.05f;      // Başa dönme (çok hızlı)
 
     private Vector3 startLocalPos;
-    private Tween moveTween;
+    private Sequence tailSequence;
 
     void Start()
     {
         startLocalPos = transform.localPosition;
-        StartMovement();
+        StartTailAnimation();
+
+        Debug.Log("🦊 Kuyruk animasyonu başladı");
     }
 
-    void StartMovement()
+    void StartTailAnimation()
     {
-        // Sağa-sola yumuşak hareket
-        moveTween = transform.DOLocalMoveX(startLocalPos.x + moveDistance, moveDuration)
-            .SetEase(moveEase)
-            .SetLoops(-1, LoopType.Yoyo);
+        tailSequence = DOTween.Sequence();
+
+        // SAĞA git (yavaşça) ← DEĞİŞTİ (+ işareti)
+        tailSequence.Append(
+            transform.DOLocalMoveX(startLocalPos.x + distance, speed)
+                .SetEase(Ease.Linear)
+        );
+
+        // Başa dön (anında veya hızlı)
+        tailSequence.Append(
+            transform.DOLocalMoveX(startLocalPos.x, resetDelay)
+                .SetEase(Ease.OutQuad)
+        );
+
+        // Sonsuz döngü
+        tailSequence.SetLoops(-1);
     }
 
     void OnDestroy()
     {
-        moveTween?.Kill();
+        tailSequence?.Kill();
     }
 }

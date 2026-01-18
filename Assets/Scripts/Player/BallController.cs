@@ -26,11 +26,17 @@ public class BallController : MonoBehaviour
 
     private TrailRenderer trailRenderer; // YENİ
 
+    private Vector3 originalScale; // YENİ - başlangıç scale'ini kaydet
+
+
     // Oyun başladığında bir kez çalışır
     void Start()
     {
         // Bu objenin sprite renderer bileşenini al
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // Başlangıç scale'ini kaydet - YENİ
+        originalScale = transform.localScale; // (0.5, 0.5, 1) olacak
 
         // TrailHelper altındaki Trail'i bul
         Transform trailHelper = transform.Find("TrailHelper");
@@ -38,22 +44,18 @@ public class BallController : MonoBehaviour
         {
             trailRenderer = trailHelper.GetComponentInChildren<TrailRenderer>();
         }
+        else
+        {
+            Debug.LogError("❌ TrailHelper bulunamadı!"); // DEBUG
+        }
 
         // İlk rengi ayarla (animasyonsuz)
         spriteRenderer.color = availableColors[currentColorIndex];
 
-        // DEBUG LOG - YENİ
-        if (trailRenderer != null)
-        {
-            Debug.Log("✅ Trail Renderer bulundu!");
-        }
-        else
-        {
-            Debug.LogError("❌ Trail Renderer BULUNAMADI!");
-        }
-
         // İlk rengi ayarla
         ChangeColor();
+
+        UpdateTrailColor();
     }
 
     // Her frame'de çalışır
