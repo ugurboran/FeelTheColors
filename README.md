@@ -11,7 +11,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](LICENSE)
 [![Status](https://img.shields.io/badge/Status-Released-success.svg?style=flat)]()
 
-[Download on Google Play](#) | [View Demo](#) | [Report Bug](https://github.com/yourusername/feelthecolors/issues)
+[Download on Google Play](#) | [View Demo](#) | [Report Bug](https://github.com/ugurboran/feelthecolors/issues)
 
 </div>
 
@@ -267,11 +267,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-**Developer:** Your Name  
-**Email:** your.email@example.com  
-**Twitter:** [@yourhandle](https://twitter.com/yourhandle)  
+**Developer:** Uğur BORAN 
+**Email:** ugurborangamedeveloper@gmail.com  
 
-**Project Link:** [https://github.com/yourusername/feelthecolors](https://github.com/yourusername/feelthecolors)
+**Project Link:** [https://github.com/yourusername/feelthecolors](https://github.com/ugurboran/feelthecolors)
 
 ---
 
