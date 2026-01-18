@@ -38,15 +38,16 @@ public class BallController : MonoBehaviour
         // Başlangıç scale'ini kaydet - YENİ
         originalScale = transform.localScale; // (0.5, 0.5, 1) olacak
 
-        // TrailHelper altındaki Trail'i bul
-        Transform trailHelper = transform.Find("TrailHelper");
-        if (trailHelper != null)
+        // Trail'i bul (artık direkt Player'ın altında) - DEĞİŞTİ
+        trailRenderer = GetComponentInChildren<TrailRenderer>();
+
+        if (trailRenderer != null)
         {
-            trailRenderer = trailHelper.GetComponentInChildren<TrailRenderer>();
+            Debug.Log("✅ Trail bulundu!");
         }
         else
         {
-            Debug.LogError("❌ TrailHelper bulunamadı!"); // DEBUG
+            Debug.LogError("❌ Trail bulunamadı!");
         }
 
         // İlk rengi ayarla (animasyonsuz)

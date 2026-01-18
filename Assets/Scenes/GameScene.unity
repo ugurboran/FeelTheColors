@@ -271,7 +271,7 @@ Transform:
   - {fileID: 577200224}
   - {fileID: 1864023335}
   - {fileID: 577074058}
-  - {fileID: 396179192}
+  - {fileID: 1247744652}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &26787157
@@ -281,20 +281,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 26787152}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32554153b973bbd4aa8d8796290cd2e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b3948383cf609e4db2f3574ebba2e18, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BallAnimations
-  pulseDuration: 2
-  pulseScale: 0.5
-  pulseEase: 29
-  floatDuration: 2
-  floatHeight: 0.15
-  floatEase: 1
-  enableRotation: 1
-  rotationDuration: 3
-  rotationEase: 1
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSubtleMovement
+  moveSpeed: 2
+  moveDistance: 0.5
+  returnSpeed: 1
+  moveEase: 1
+  returnEase: 4
+  enableVerticalFloat: 1
+  floatSpeed: 2
+  floatHeight: 0.1
+  floatEase: 4
 --- !u!1 &157764187
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,54 +659,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379875686}
   m_CullTransparentMesh: 1
---- !u!1 &396179191
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 396179192}
-  - component: {fileID: 396179193}
-  m_Layer: 0
-  m_Name: TrailHelper
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &396179192
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396179191}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1247744652}
-  m_Father: {fileID: 26787156}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &396179193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 396179191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f471cc115aed7764da5e68f94046d979, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TrailHelperDOTween
-  speed: 1
-  distance: 1.5
-  resetDelay: 0.1
 --- !u!1 &429230254
 GameObject:
   m_ObjectHideFlags: 0
@@ -11766,12 +11718,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247744651}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 396179192}
+  m_Father: {fileID: 26787156}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &1247744653
 TrailRenderer:
@@ -11820,8 +11772,8 @@ TrailRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
-  m_Time: 3
+  m_SortingOrder: 5
+  m_Time: 2.5
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -11830,8 +11782,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.008930206
-        value: 0.8108139
+        time: 0.014877319
+        value: 1
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -11887,7 +11839,7 @@ TrailRenderer:
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
-  m_MinVertexDistance: 0.5
+  m_MinVertexDistance: 0.01
   m_MaskInteraction: 0
   m_Autodestruct: 0
   m_Emitting: 1
