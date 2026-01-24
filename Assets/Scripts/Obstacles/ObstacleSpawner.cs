@@ -1,80 +1,64 @@
-﻿// ObstacleSpawner.cs - ZORLUK ARTIŞI İLE GÜNCELLENMİŞ
+﻿// ObstacleSpawner.cs - OBJECT POOLING İLE GÜNCELLENMİŞ
 using UnityEngine;
-using System.Collections; // Coroutine için
+using System.Collections;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    // Inspector'da atanacak engel prefab'ı
-    public GameObject obstaclePrefab;
-
-    // Kullanılabilir renkler dizisi (Inspector'da ayarlanacak)
+    [Header("Temel Ayarlar")]
     public Color[] possibleColors;
 
-    // Başlangıç spawn aralığı
     public float initialSpawnInterval = 2.5f;
-
-    // Başlangıç engel hızı
     public float initialObstacleSpeed = 2f;
 
-    // Engellerin spawn olabileceği en düşük Y pozisyonu
     public float minY = -3f;
-
-    // Engellerin spawn olabileceği en yüksek Y pozisyonu
     public float maxY = 3f;
 
+    [Header("Object Pool - YENİ! ✨")]
+    public ObstaclePool obstaclePool; // Pool referansı
+
     [Header("Bildirim Paneli")]
-    public GameObject notificationPanel; // Bildirim paneli (opsiyonel)
+    public GameObject notificationPanel;
 
-    // Zorluk artış ayarları
     [Header("Zorluk Artışı Ayarları")]
-    public int scoreIntervalForSpeed = 5;        // Her 5 puanda hız artar
-    public float speedIncrement = 0.5f;          // Hız artış miktarı
-    public float maxSpeed = 8f;                  // Maksimum hız
+    public int scoreIntervalForSpeed = 5;
+    public float speedIncrement = 0.5f;
+    public float maxSpeed = 8f;
 
-    public int scoreIntervalForSpawnRate = 10;   // Her 10 puanda spawn aralığı azalır
-    public float spawnRateDecrement = 0.1f;      // Spawn aralığı azalma miktarı
-    public float minSpawnInterval = 0.8f;        // Minimum spawn aralığı
+    public int scoreIntervalForSpawnRate = 10;
+    public float spawnRateDecrement = 0.1f;
+    public float minSpawnInterval = 0.8f;
 
-    // Şu anki değerler
     private float currentSpawnInterval;
     private float currentObstacleSpeed;
-
-    // Zamanlayıcı değişkeni (spawn aralığını kontrol eder)
     private float timer = 0f;
 
-    // Son zorluk artışı yapılan skor
     private int lastSpeedIncreaseScore = 0;
     private int lastSpawnRateDecreaseScore = 0;
 
-    // Başlangıçta çalışır
     void Start()
     {
-        // Başlangıç değerlerini ayarla
         currentSpawnInterval = initialSpawnInterval;
         currentObstacleSpeed = initialObstacleSpeed;
+
+        if (obstaclePool == null)
+        {
+            Debug.LogError("❌ ObstaclePool atanmamış!");
+        }
     }
 
-    // Her frame'de çalışır
     void Update()
     {
-        // Zamanlayıcıyı artır (geçen süreyi ekle)
         timer += Time.deltaTime;
 
-        // Zamanlayıcı spawn aralığına ulaştı mı?
         if (timer >= currentSpawnInterval)
         {
-            // Yeni engel oluştur
             SpawnObstacle();
-
-            // Zamanlayıcıyı sıfırla
             timer = 0f;
         }
 
-        // Zorluk artışını kontrol et
         UpdateDifficulty();
     }
 
-    // Zorluk seviyesini güncelle
     void UpdateDifficulty()
     {
         if (GameManager.Instance == null) return;
@@ -94,11 +78,9 @@ public class ObstacleSpawner : MonoBehaviour
                 }
 
                 lastSpeedIncreaseScore = currentScore;
-
-                // Bildirim göster
                 ShowDifficultyNotification();
 
-                Debug.Log("Hız arttı! Yeni hız: " + currentObstacleSpeed);
+                Debug.Log("⚡ Hız arttı! Yeni hız: " + currentObstacleSpeed);
             }
         }
 
@@ -115,16 +97,13 @@ public class ObstacleSpawner : MonoBehaviour
                 }
 
                 lastSpawnRateDecreaseScore = currentScore;
-
-                // Bildirim göster
                 ShowDifficultyNotification();
 
-                Debug.Log("Spawn aralığı azaldı! Yeni aralık: " + currentSpawnInterval);
+                Debug.Log("⚡ Spawn aralığı azaldı! Yeni aralık: " + currentSpawnInterval);
             }
         }
     }
 
-    // Zorluk artışı bildirimini göster
     void ShowDifficultyNotification()
     {
         if (notificationPanel != null)
@@ -133,44 +112,50 @@ public class ObstacleSpawner : MonoBehaviour
         }
     }
 
-    // Bildirimi göster ve 2 saniye sonra gizle
     IEnumerator ShowNotificationCoroutine()
     {
-        // Paneli göster
         notificationPanel.SetActive(true);
-
-        // 2 saniye bekle (real time - pause etkilemesin)
         yield return new WaitForSecondsRealtime(2f);
-
-        // Paneli gizle
         notificationPanel.SetActive(false);
     }
 
-    // Yeni bir engel oluşturur
     void SpawnObstacle()
     {
-        // MinY ve MaxY arasında rastgele bir Y pozisyonu seç
+        // Havuzdan obstacle al - YENİ! ✨
+        GameObject obstacle = obstaclePool.GetObstacle();
+
+        // Pozisyon ayarla
         float randomY = Random.Range(minY, maxY);
-
-        // Spawn pozisyonunu oluştur (X: spawner'ın pozisyonu, Y: rastgele)
         Vector3 spawnPosition = new Vector3(transform.position.x, randomY, 0);
+        obstacle.transform.position = spawnPosition;
+        obstacle.transform.rotation = Quaternion.identity;
 
-        // Prefab'dan yeni engel objesi oluştur
-        GameObject obstacle = Instantiate(obstaclePrefab, spawnPosition, Quaternion.identity);
-
-        // Mevcut renklerden rastgele birini seç
+        // Renk ayarla
         Color randomColor = possibleColors[Random.Range(0, possibleColors.Length)];
 
-        // Oluşturulan engelin rengini ayarla
-        obstacle.GetComponent<Obstacle>().lineColor = randomColor;
+        Obstacle obstacleScript = obstacle.GetComponent<Obstacle>();
+        obstacleScript.lineColor = randomColor;
 
-        // Engelin Rigidbody2D bileşenini al
+        SpriteRenderer sr = obstacle.GetComponent<SpriteRenderer>();
+        sr.color = randomColor;
+
+        // Hız ver
         Rigidbody2D rb = obstacle.GetComponent<Rigidbody2D>();
-
-        // Engele SAĞDAN SOLA hareket hızı ver (mevcut hız ile)
         rb.linearVelocity = Vector2.left * currentObstacleSpeed;
 
-        // 10 saniye sonra bu engeli yok et (bellek tasarrufu)
-        Destroy(obstacle, 10f);
+        // Otomatik geri dönüş - YENİ! ✨
+        StartCoroutine(ReturnObstacleAfterDelay(obstacle, 10f));
+    }
+
+    // Obstacle'ı belirli süre sonra havuza geri ver - YENİ! ✨
+    IEnumerator ReturnObstacleAfterDelay(GameObject obstacle, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Hala aktifse havuza geri ver
+        if (obstacle != null && obstacle.activeInHierarchy)
+        {
+            obstaclePool.ReturnObstacle(obstacle);
+        }
     }
 }
