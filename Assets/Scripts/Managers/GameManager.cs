@@ -126,6 +126,13 @@ public class GameManager : MonoBehaviour
     // Oyunu yeniden başlat (UI Button tarafından çağrılır)
     public void RestartGame()
     {
+        // Pool'u temizle - YENİ! ✨
+        ObstaclePool pool = FindObjectOfType<ObstaclePool>();
+        if (pool != null)
+        {
+            pool.ReturnAllObstacles();
+        }
+
         // BUTON SESİ ÇAL
         if (AudioManager.Instance != null)
         {
