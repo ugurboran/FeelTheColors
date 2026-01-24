@@ -1,61 +1,71 @@
-﻿// Obstacle.cs - GÜNCELLENMİŞ
+﻿// Obstacle.cs - POOLING DESTEĞİ İLE
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Obstacle : MonoBehaviour
 {
-    // Bu engelin rengi (Spawner tarafından ayarlanacak)
     public Color lineColor;
 
-    // Engelin rengini değiştirmek için sprite renderer
     private SpriteRenderer spriteRenderer;
+    private ObstaclePool pool; // Pool referansı
 
-    // Engel oluşturulduğunda bir kez çalışır
     void Start()
     {
-        // Bu objenin sprite renderer bileşenini al
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-        // Engelin rengini ayarlanmış renge çevir
         spriteRenderer.color = lineColor;
     }
 
-    // Bir şey bu engele trigger olarak temas edince çalışır
+    // Pool referansını ayarla - YENİ! ✨
+    public void SetPool(ObstaclePool poolReference)
+    {
+        pool = poolReference;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Temas eden obje "Player" tag'ine sahip mi kontrol et
         if (other.CompareTag("Player"))
         {
-            // Player objesinden BallController script'ini al
             BallController ball = other.GetComponent<BallController>();
 
-            // Topun şu anki rengi bu engelin rengiyle aynı mı?
             if (ball.GetCurrentColor() != lineColor)
             {
-                // RENKLER UYUŞMUYOR - Oyun bitti
                 GameManager.Instance.GameOver();
             }
             else
             {
-                // RENKLER UYUŞUYOR - Puan kazan
                 GameManager.Instance.AddScore();
 
-                // Mutlu yüz - YENİ! ✨
                 FaceController face = other.GetComponentInChildren<FaceController>();
                 if (face != null)
                 {
                     face.ShowHappy();
                 }
 
-                // Puan efektini çalıştır (Player'daki particle)
                 PlayScoreEffect(other.gameObject);
             }
+
+            // Collision sonrası havuza geri dön - YENİ! ✨
+            ReturnToPool();
         }
     }
 
-    // Puan kazanma efektini çalıştır
+    // Havuza geri dön - YENİ! ✨
+    void ReturnToPool()
+    {
+        if (pool != null)
+        {
+            pool.ReturnObstacle(gameObject);
+        }
+        else
+        {
+            // Pool yoksa normal destroy (güvenlik)
+            Destroy(gameObject);
+        }
+    }
+
     void PlayScoreEffect(GameObject player)
     {
-        // Player'daki ScoreParticles'ı bul ve çalıştır
         ParticleSystem scoreParticles = player.transform.Find("ScoreParticles")?.GetComponent<ParticleSystem>();
 
         if (scoreParticles != null)
