@@ -1,14 +1,13 @@
-﻿// Obstacle.cs - POOLING DESTEĞİ İLE
-using Unity.VisualScripting;
+﻿// Obstacle.cs - COROUTİNE İPTALİ İLE
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Obstacle : MonoBehaviour
 {
     public Color lineColor;
 
     private SpriteRenderer spriteRenderer;
-    private ObstaclePool pool; // Pool referansı
+    private ObstaclePool pool;
+    private bool isReturned = false; // Geri döndü mü? - YENİ! ✨
 
     void Start()
     {
@@ -16,7 +15,12 @@ public class Obstacle : MonoBehaviour
         spriteRenderer.color = lineColor;
     }
 
-    // Pool referansını ayarla - YENİ! ✨
+    void OnEnable()
+    {
+        // Aktif olduğunda flag'i sıfırla - YENİ! ✨
+        isReturned = false;
+    }
+
     public void SetPool(ObstaclePool poolReference)
     {
         pool = poolReference;
@@ -45,21 +49,23 @@ public class Obstacle : MonoBehaviour
                 PlayScoreEffect(other.gameObject);
             }
 
-            // Collision sonrası havuza geri dön - YENİ! ✨
             ReturnToPool();
         }
     }
 
-    // Havuza geri dön - YENİ! ✨
     void ReturnToPool()
     {
+        // Zaten döndüyse tekrar dönme - YENİ! ✨
+        if (isReturned) return;
+
+        isReturned = true; // İşaretle
+
         if (pool != null)
         {
             pool.ReturnObstacle(gameObject);
         }
         else
         {
-            // Pool yoksa normal destroy (güvenlik)
             Destroy(gameObject);
         }
     }
