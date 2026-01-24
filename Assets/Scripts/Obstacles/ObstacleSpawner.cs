@@ -11,10 +11,10 @@ public class ObstacleSpawner : MonoBehaviour
     public Color[] possibleColors;
 
     // Başlangıç spawn aralığı
-    public float initialSpawnInterval = 2f;
+    public float initialSpawnInterval = 2.5f;
 
     // Başlangıç engel hızı
-    public float initialObstacleSpeed = 3f;
+    public float initialObstacleSpeed = 2f;
 
     // Engellerin spawn olabileceği en düşük Y pozisyonu
     public float minY = -3f;
