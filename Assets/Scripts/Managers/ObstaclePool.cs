@@ -1,22 +1,21 @@
-﻿// ObstaclePool.cs - OBJECT POOLING SİSTEMİ
+﻿// ObstaclePool.cs - NULL CHECK İLE GÜNCELLENMİŞ
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstaclePool : MonoBehaviour
 {
     [Header("Pool Ayarları")]
-    public GameObject obstaclePrefab;        // Obstacle prefab'ı
-    public int poolSize = 10;                // Havuz boyutu
-    public Transform poolParent;             // Pool parent objesi (opsiyonel)
+    public GameObject obstaclePrefab;
+    public int poolSize = 15;
+    public Transform poolParent;
 
-    private List<GameObject> pool;           // Obstacle havuzu
+    private List<GameObject> pool;
 
     void Start()
     {
         InitializePool();
     }
 
-    // Havuzu başlat
     void InitializePool()
     {
         pool = new List<GameObject>();
@@ -30,35 +29,43 @@ public class ObstaclePool : MonoBehaviour
         Debug.Log($"✅ Object Pool oluşturuldu: {poolSize} obstacle");
     }
 
-    // Yeni obstacle oluştur
     GameObject CreateNewObstacle()
     {
         GameObject obj = Instantiate(obstaclePrefab);
 
-        // Parent ayarla (opsiyonel - hiyerarşi düzenli olsun)
         if (poolParent != null)
         {
             obj.transform.SetParent(poolParent);
         }
 
-        obj.SetActive(false); // Başlangıçta kapalı
+        Obstacle obstacleScript = obj.GetComponent<Obstacle>();
+        if (obstacleScript != null)
+        {
+            obstacleScript.SetPool(this);
+        }
+
+        obj.SetActive(false);
         return obj;
     }
 
-    // Havuzdan obstacle al
     public GameObject GetObstacle()
     {
+        // NULL CHECK EKLE - YENİ! ✨
+        // Önce null objeleri temizle
+        pool.RemoveAll(item => item == null);
+
         // Havuzda kullanılabilir obstacle ara
         foreach (GameObject obj in pool)
         {
-            if (!obj.activeInHierarchy)
+            // NULL CHECK - YENİ! ✨
+            if (obj != null && !obj.activeInHierarchy)
             {
                 obj.SetActive(true);
                 return obj;
             }
         }
 
-        // Havuzda yer yok, yeni obstacle oluştur (dinamik genişleme)
+        // Havuzda yer yok, yeni obstacle oluştur
         Debug.LogWarning("⚠️ Pool doldu! Yeni obstacle ekleniyor...");
         GameObject newObj = CreateNewObstacle();
         pool.Add(newObj);
@@ -66,24 +73,65 @@ public class ObstaclePool : MonoBehaviour
         return newObj;
     }
 
-    // Obstacle'ı havuza geri ver
     public void ReturnObstacle(GameObject obj)
     {
+        // NULL CHECK - YENİ! ✨
+        if (obj == null)
+        {
+            Debug.LogWarning("⚠️ Null obstacle döndürülmeye çalışıldı!");
+            return;
+        }
+
         obj.SetActive(false);
 
-        // Pozisyonu sıfırla (opsiyonel)
-        obj.transform.position = Vector3.zero;
+        // Rigidbody'yi sıfırla
+        Rigidbody2D rb = obj.GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
-    // Tüm aktif obstacle'ları havuza geri ver
     public void ReturnAllObstacles()
     {
+        // NULL CHECK ile temizle - YENİ! ✨
+        pool.RemoveAll(item => item == null);
+
         foreach (GameObject obj in pool)
         {
-            if (obj.activeInHierarchy)
+            if (obj != null && obj.activeInHierarchy)
             {
-                obj.SetActive(false);
+                ReturnObstacle(obj);
             }
+        }
+    }
+
+    // Debug
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            int active = 0;
+            int inactive = 0;
+            int nullCount = 0; // NULL sayısı - YENİ!
+
+            foreach (GameObject obj in pool)
+            {
+                if (obj == null)
+                {
+                    nullCount++;
+                }
+                else if (obj.activeInHierarchy)
+                {
+                    active++;
+                }
+                else
+                {
+                    inactive++;
+                }
+            }
+
+            Debug.Log($"📊 Pool: Aktif={active}, İnaktif={inactive}, Null={nullCount}, Toplam={pool.Count}");
         }
     }
 }
