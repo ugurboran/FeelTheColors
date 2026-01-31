@@ -2385,6 +2385,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994295562}
   m_CullTransparentMesh: 1
+--- !u!1 &1007092691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1007092693}
+  - component: {fileID: 1007092692}
+  m_Layer: 0
+  m_Name: ThemeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1007092692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007092691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7d85d74fb1b0294f84faf93cac82f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ThemeManager
+  themes:
+  - themeName: summer
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    backgroundPrefab: {fileID: 5664376277056814133, guid: 12837502c8333ca4794aa7d01148188b, type: 3}
+    obstacleColors: []
+    playerColor: {r: 0, g: 0, b: 0, a: 0}
+    isUnlocked: 0
+    unlockScore: 0
+  - themeName: summerv2
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    backgroundPrefab: {fileID: 8797614910686604078, guid: dfb0f07d22c0b744a942b4ea54746fc5, type: 3}
+    obstacleColors: []
+    playerColor: {r: 0, g: 0, b: 0, a: 0}
+    isUnlocked: 0
+    unlockScore: 0
+  - themeName: sky
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    backgroundPrefab: {fileID: 2000994170930287083, guid: f9c836c2efb947c48a4eae7b29ad7276, type: 3}
+    obstacleColors: []
+    playerColor: {r: 0, g: 0, b: 0, a: 0}
+    isUnlocked: 0
+    unlockScore: 0
+  - themeName: skyv2
+    backgroundColor: {r: 0, g: 0, b: 0, a: 0}
+    backgroundPrefab: {fileID: 4667758150076617424, guid: feb9b262afc65fe48b6f1e2010945266, type: 3}
+    obstacleColors: []
+    playerColor: {r: 0, g: 0, b: 0, a: 0}
+    isUnlocked: 0
+    unlockScore: 0
+  mainCamera: {fileID: 604532972}
+--- !u!4 &1007092693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1007092691}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.1927, y: 0.57557, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1059802958
 GameObject:
   m_ObjectHideFlags: 0
@@ -3685,3 +3759,4 @@ SceneRoots:
   - {fileID: 1900891877}
   - {fileID: 1297536409}
   - {fileID: 1404468732}
+  - {fileID: 1007092693}

@@ -11360,6 +11360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: layer 9
       objectReference: {fileID: 0}
+    - target: {fileID: 2000994170930287083, guid: f9c836c2efb947c48a4eae7b29ad7276, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5821563091157289819, guid: f9c836c2efb947c48a4eae7b29ad7276, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
