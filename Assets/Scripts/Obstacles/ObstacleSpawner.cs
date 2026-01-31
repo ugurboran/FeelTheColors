@@ -61,8 +61,8 @@ public class ObstacleSpawner : MonoBehaviour
     // Şu anki spawn aralığı
     private float currentSpawnInterval;
 
-    // currentObstacleSpeed'i public yap (ParallaxController erişebilsin)
-    public float currentObstacleSpeed { get; private set; } // YENİ!
+    // Şu anki engel hızı
+    private float currentObstacleSpeed;
 
     // Zamanlayıcı değişkeni (spawn aralığını kontrol eder)
     private float timer = 0f;
@@ -82,7 +82,7 @@ public class ObstacleSpawner : MonoBehaviour
     {
         // Başlangıç değerlerini ayarla
         currentSpawnInterval = initialSpawnInterval;
-        currentObstacleSpeed = initialObstacleSpeed;// Artık public property
+        currentObstacleSpeed = initialObstacleSpeed;
 
         // Pool referansı kontrolü
         if (obstaclePool == null)
