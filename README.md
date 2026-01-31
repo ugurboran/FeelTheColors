@@ -270,7 +270,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Developer:** Uğur BORAN 
 **Email:** ugurborangamedeveloper@gmail.com  
 
-**Project Link:** [https://github.com/yourusername/feelthecolors](https://github.com/ugurboran/feelthecolors)
+**Project Link:** [https://github.com/ugurboran/feelthecolors](https://github.com/ugurboran/feelthecolors)
 
 ---
 
