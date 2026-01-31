@@ -6,7 +6,6 @@ using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement; // YENİ
 using static ThemeManager;
 
 public class ThemeManager : MonoBehaviour
@@ -65,8 +64,6 @@ public class ThemeManager : MonoBehaviour
 
         // Kaydedilmiş temayı yükle
         LoadTheme();
-
-        SceneManager.sceneLoaded += OnSceneLoaded; // Scene yüklenince çağrılır
     }
 
     // Oyun başladığında çalışır
@@ -74,12 +71,6 @@ public class ThemeManager : MonoBehaviour
     {
         // Başlangıçta temayı uygula
         ApplyTheme(currentThemeIndex);
-    }
-
-    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        mainCamera = Camera.main; // Yeni kamerayı bul
-        ApplyTheme(currentThemeIndex); // Temayı uygula
     }
 
     // Belirli bir temayı uygula
